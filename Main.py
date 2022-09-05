@@ -1,45 +1,56 @@
 class Node:
+  """
+  Class implementing node of the LinkedList
+  Attributes:
+    -> data - data held by the node
+    -> next - link to the next node
+  """
   def __init__(self, data):
     self.data = data
     self.next = None
 
 
 class Queue:
+  """
+  Class implementing Queue as a LinkedList
+  """
   def __init__(self):
+    """
+    Initialises Queue object with pointers head and tail set to None
+    """
     self.head = None
-    self.last = None
+    self.tail = None
 
   def enqueue(self, data) -> None:
-    # Write your code here
-    temp = Node(data)
-    if(self.head == self.last):
-      self.head = temp
-      self.last = temp
-    else:
-      self.last.next = temp
+    """
+    Adds node containing data passed to the rear of the queue
+    """
+    new = Node(data)
+    if not self.tail is None:
+      self.tail.next = new
+    if self.head is None:
+      self.head = new
+    self.tail = new
 
   def dequeue(self) -> None:
-    # Write your code here
-    while(self.head != self.last):
-      temp = self.head
-      self.head = temp.next
-      temp.next = None
-    else:
-      self.head = None
-      self.last = None
+    """
+    Removes node from the rear of the queue
+    """
+    if not self.head is None:
+      self.head = self.head.next
+      if self.head is None:
+        self.tail = None
 
   def status(self) -> None:
-    # Write your code here
-    temp = self.head
-    if(self.head != None):
-      while(temp.next != None):
-        print(temp.data, end= "=>")
-        temp = temp.next
-      else:
-        print(temp.data,"None", sep="=>")
-    else:
-        print("None")
-     
+    """
+    It prints all the elements of Queue.
+    """
+    elements = ""
+    curr = self.head
+    while not curr is None:
+      elements += str(curr.data) + "=>"
+      curr = curr.next
+    print(elements + "None")
 
 
 # Do not change the following code
